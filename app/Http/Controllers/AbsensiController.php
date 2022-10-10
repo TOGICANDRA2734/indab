@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
 {
@@ -23,7 +24,9 @@ class AbsensiController extends Controller
      */
     public function create()
     {
-        return view('absensi.create');
+        $data = DB::table('indab_absensi')->select('*')->get();
+
+        return view('absensi.create', compact('data'));
     }
 
     /**
@@ -45,7 +48,9 @@ class AbsensiController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = DB::table('indab_absensi_detail')->select('*')->where('id_meeting', '=', $id)->get();
+
+        return view('absensi.show', compact('data'));
     }
 
     /**

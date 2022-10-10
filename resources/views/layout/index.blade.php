@@ -15,11 +15,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css" rel="stylesheet" />
+    <link href="{{asset('dist/css/tabler.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('dist/css/tabler-flags.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('dist/css/tabler-payments.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('dist/css/tabler-vendors.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('dist/css/demo.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
 

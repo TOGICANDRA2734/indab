@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InduksiController;
 use Illuminate\Support\Facades\Route;
