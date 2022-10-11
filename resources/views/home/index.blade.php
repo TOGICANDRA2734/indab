@@ -3,7 +3,7 @@
 @section('content')
     <div class="row row-deck row-cards">
         <div class="col-4">
-            <a class="card" href="{{ route('home.index') }}">
+            <a class="card" href="{{ route('induksi.create') }}">
                 <div class="card-body text-center">
                     <div class="d-flex align-items-center">
                         <div class="header mb-3">Induksi</div>

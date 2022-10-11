@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Induksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InduksiController extends Controller
 {
@@ -23,7 +25,8 @@ class InduksiController extends Controller
      */
     public function create()
     {
-        return view('induksi.create');
+        $data = DB::table('indab_induksi')->select("*")->get();
+        return view('induksi.create', compact('data'));
     }
 
     /**
@@ -34,7 +37,32 @@ class InduksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama'=> 'required',
+            'perusahaan'=> 'required',
+            'nama'=> 'required|min:3',
+            'jabatan'=> 'required',
+            'keperluan'=> 'required',
+            'waktu'=> 'required',
+            'no_hp'=> 'required|max:15',
+        ]);
+
+        $report = Induksi::create([
+            'nama'=> $request->nama,
+            'perusahaan'=> $request->perusahaan,
+            'nama'=> $request->nama,
+            'jabatan'=> $request->jabatan,
+            'keperluan'=> $request->keperluan,
+            'waktu'=> $request->waktu,
+            'no_hp'=> $request->no_hp,
+        ]);
+        
+
+        if($report){
+            return redirect()->route('induksi.create')->with(['success' => 'Data Berhasil Ditambah!']);
+        } else {
+            return redirect()->route('induksi.create')->with(['error' => 'Data Gagal Ditambah!']);
+        }
     }
 
     /**

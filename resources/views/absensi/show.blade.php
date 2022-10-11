@@ -1,5 +1,20 @@
 @extends('layout.index')
 
+@section('title-utama', "ABSENSI MEETING")
+
+@section('button-add')
+    <a href="{{route('absensi.edit', $id)}}" class="btn btn-primary d-none d-sm-inline-block">
+        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Input Hadir
+    </a>
+@endsection
+
 @section('content')
     <div class="col-12">
         <div class="card">
@@ -7,13 +22,12 @@
                 <table class="table table-vcenter card-table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Title</th>
-                            <th>Title</th>
-                            <th>Role</th>
-                            <th>Role</th>
-                            <th>Role</th>
-                            <th class="w-1"></th>
+                            <th>Peserta Meeting</th>
+                            <th>Perusahaan</th>
+                            <th>Alamat</th>
+                            <th>Jabatan</th>
+                            <th>No. HP</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,47 +36,27 @@
                                 <td data-label="Name">
                                     <div class="d-flex py-1 align-items-center">
                                         <div class="flex-fill">
-                                            <div class="font-weight-medium">{{$dt->nama}}</div>
+                                            <div class="font-weight-medium">{{ $dt->nama }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td data-label="Title">
-                                    <div>{{$dt->perusahaan}}</div>
+                                    <div>{{ $dt->perusahaan }}</div>
                                 </td>
                                 <td data-label="Title">
-                                    <div>{{$dt->alamat}}</div>
+                                    <div>{{ $dt->alamat }}</div>
                                 </td>
                                 <td class="text-muted" data-label="Role">
-                                    {{$dt->jabatan}}
+                                    {{ $dt->jabatan }}
                                 </td>
-                                
+
                                 <td class="text-muted" data-label="Role">
-                                    {{$dt->no_hp}}
+                                    {{ $dt->no_hp }}
                                 </td>
-                                
+
                                 <td class="text-muted" data-label="Role">
-                                    {{$dt->email}}
-                                </td>
-                                <td>
-                                    <div class="btn-list flex-nowrap">
-                                        <a href="#" class="btn">
-                                            Detail
-                                        </a>
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                                                Actions
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">
-                                                    Action
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    Another action
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{ $dt->email }}
                                 </td>
                             </tr>
                         @endforeach

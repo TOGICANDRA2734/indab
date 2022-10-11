@@ -21,3 +21,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::resource('induksi', InduksiController::class);
 Route::resource('absensi', AbsensiController::class);
 Route::resource('meeting', MeetingController::class);
+
+Route::post('absensi-input/{id}', [AbsensiController::class, 'update'])->name('absensi-input.update');
