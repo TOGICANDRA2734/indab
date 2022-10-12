@@ -44,7 +44,7 @@
                                 @yield('title-utama')
                             </h2>
                         </div>
-                        <div class="col-auto ms-auto d-print-none">
+                        <div class="col-auto ms-auto">
                             @yield('button-add')
                         </div>
                     </div>
@@ -64,7 +64,7 @@
     </div>
     {{-- Modal --}}
     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-        <form class="modal-dialog modal-lg" role="document" method="POST" action="@yield('modal-route')">
+        <form class="modal-dialog modal-lg" role="document" method="POST" action="@yield('modal-route')" @yield('form-tambahan')>
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,6 +85,9 @@
     @include('component.jsClass')
     @yield('js')
     {{-- Component JavaScript Class --}}
+
+    {{-- Include Sweet Alert --}}
+    @include('sweetalert::alert')
 </body>
 
 </html>

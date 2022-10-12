@@ -20,6 +20,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::resource('induksi', InduksiController::class);
 Route::resource('absensi', AbsensiController::class);
-Route::resource('meeting', MeetingController::class);
 
 Route::post('absensi-input/{id}', [AbsensiController::class, 'update'])->name('absensi-input.update');
+Route::post('absensi-input/{lokasi}', [AbsensiController::class, 'create'])->name('absensi-input.create');
+
+Route::get('/{lokasi}', [AbsensiController::class, 'create_data'])->name('absensi-location.index');
+Route::get('/', [AbsensiController::class, 'create_data'])->name('absensi-location.index');

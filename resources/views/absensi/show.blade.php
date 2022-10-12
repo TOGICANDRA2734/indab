@@ -3,7 +3,7 @@
 @section('title-utama', "ABSENSI MEETING")
 
 @section('button-add')
-    <a href="{{route('absensi.edit', $id)}}" class="btn btn-primary d-none d-sm-inline-block">
+    <a href="{{route('absensi.edit', $id)}}" class="btn btn-primary d-sm-inline-block">
         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -22,18 +22,17 @@
                 <table class="table table-vcenter card-table">
                     <thead>
                         <tr>
-                            <th>Peserta Meeting</th>
+                            <th>Nama</th>
                             <th>Perusahaan</th>
                             <th>Alamat</th>
                             <th>Jabatan</th>
-                            <th>No. HP</th>
-                            <th>Email</th>
+                            <th>Kontak</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $key => $dt)
                             <tr>
-                                <td data-label="Name">
+                                <td data-label="Nama">
                                     <div class="d-flex py-1 align-items-center">
                                         <div class="flex-fill">
                                             <div class="font-weight-medium">{{ $dt->nama }}</div>
@@ -41,22 +40,18 @@
                                     </div>
                                 </td>
 
-                                <td data-label="Title">
+                                <td data-label="Perusahaan">
                                     <div>{{ $dt->perusahaan }}</div>
                                 </td>
-                                <td data-label="Title">
+                                <td data-label="Alamat">
                                     <div>{{ $dt->alamat }}</div>
                                 </td>
-                                <td class="text-muted" data-label="Role">
+                                <td class="text-muted" data-label="Jabatan">
                                     {{ $dt->jabatan }}
                                 </td>
 
-                                <td class="text-muted" data-label="Role">
-                                    {{ $dt->no_hp }}
-                                </td>
-
-                                <td class="text-muted" data-label="Role">
-                                    {{ $dt->email }}
+                                <td class="text-muted" data-label="Email">
+                                    {{ $dt->kontak }}
                                 </td>
                             </tr>
                         @endforeach

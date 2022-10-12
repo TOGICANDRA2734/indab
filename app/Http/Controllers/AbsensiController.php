@@ -27,9 +27,35 @@ class AbsensiController extends Controller
      */
     public function create()
     {
-        $data = DB::table('indab_absensi')->select('*')->get();
+        $data = DB::table('indab_absensi')->select('*')->orderBy('tgl')->orderBy('id')->get();
+        $lokasi = DB::table('indab_lokasi')->select('*')->get();
 
-        return view('absensi.create', compact('data'));
+        return view('absensi.create', compact('data', 'lokasi'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_data(Request $request)
+    {
+        // TODO ADMIN
+
+        // TODO USER
+        $subquery = "SELECT judul_meeting, tgl, waktu, IF(link_meeting is not null, \"Meeting Online\", \"Meeting Offline\") status_ol, status_meeting 
+        FROM indab_absensi a 
+        JOIN INDAB_LOKASI b 
+        ON a.lokasi=b.kode
+        WHERE a.lokasi=".$request->lokasi."
+        ORDER BY a.lokasi, a.tgl, a.id";
+        $data = collect(DB::select(DB::raw($subquery)));
+        dd($data);
+
+        $lokasi = DB::table('indab_lokasi')->select('*')->get();
+
+
+        return view('absensi.create', compact('data', 'lokasi'));
     }
 
     /**
@@ -51,13 +77,16 @@ class AbsensiController extends Controller
 
         
         $report = Absensi::create([
-            'tgl' => Carbon::now(),
+            'tgl' => $request->tgl,
             'judul_meeting' => $request->judul_meeting,
             'waktu' => $request->waktu,
             'peserta' => $request->peserta,
             'jumlah' => $request->jumlah,
             'notulen' => $request->notulen,
+            'file_notulen' => $request->file_notulen,
             'dok_1' => $request->dok_1,
+            'lokasi' => $request->lokasi,
+            'link_meeting' => $request->link_meeting,
         ]);
         
 
@@ -101,14 +130,11 @@ class AbsensiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
         $request->validate([
             'nama' => 'required',
             'perusahaan' => 'required',
-            'alamat' => 'required',
-            'jabatan' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
         ]);
 
         
@@ -116,10 +142,9 @@ class AbsensiController extends Controller
             'id_meeting' => $id,
             'nama' => $request->nama,
             'perusahaan' => $request->perusahaan,
-            'alamat' => $request->alamat,
-            'jabatan' => $request->jabatan,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
+            'alamat' => $request->alamat ? $request->alamat : "" ,
+            'jabatan' => $request->jabatan ? $request->jabatan : "" ,
+            'kontak' => $request->kontak ? $request->kontak : "" ,
         ]);
         
 
