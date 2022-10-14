@@ -57,7 +57,13 @@
                                 </td>
                                 <td data-label="Link Meeting">
                                     <div>
-                                        {{ $dt->link_meeting }}
+                                        @if ($dt->link_meeting === 'Meeting Offline')
+                                            <p>
+                                                {{ $dt->link_meeting }}
+                                            </p>                                            
+                                        @else
+                                            <a href="{{$dt->link_meeting}}">Meeting Online</a>
+                                        @endif
                                     </div>
                                 </td>
                                 <td data-label="Status">
@@ -65,7 +71,7 @@
                                 </td>
                                 <td data-label="Link">
                                     <div>
-                                        <a href="#">Download Link</a>
+                                        <a href="{{route('absensi.detail_dokumen', $dt->id)}}">Download Link</a>
                                     </div>
                                 </td>
                                 <td class="mb-3">
@@ -106,7 +112,7 @@
                     <input type="password" class="form-control mb-3" name="Password" id="password">
                     <input type="hidden" value="{{ route('passwordAbsensi.index') }}" id="url">
                     <h3>Apakah kamu yakin?</h3>
-                    <div class="text-muted">Password akan diawasi oleh admin.</div>
+                    <div class="text-muted">Jika ada kendala hubungi Tim IT Head Office.</div>
                 </div>
                 <div class="modal-footer">
                     <div class="w-100">
@@ -168,8 +174,8 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Link Meeting</label>
-        <input type="text" class="form-control" name="link">
-        @error('link')
+        <input type="text" class="form-control" name="link_meeting">
+        @error('link_meeting')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
@@ -241,6 +247,11 @@
         @enderror
     </div>
 
+    <div class="mb-3">
+        <label class="form-label">Token</label>
+        <input type="text" class="form-control bg-danger text-white font-bold " name="edit" value="{{strtoupper(\Illuminate\Support\Str::random(1)) . rand(0,1) . rand(0,1)}}" readonly="readonly" /> 
+    </div>
+
 @endsection
 
 @section('form-tambahan', 'enctype=multipart/form-data')
@@ -275,8 +286,10 @@
                 },
                 url: url,
                 success: function(result) {
-                    console.log("HALOOO");
-                    $('#modal').attr('data-bs-target', '#modal-report');
+                    console.log(result);
+                    if(result == 1){
+                        $('#modal').attr('data-bs-target', '#modal-report');
+                    }
                 },
                 error: function(result) {
 

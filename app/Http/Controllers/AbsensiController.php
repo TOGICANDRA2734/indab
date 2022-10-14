@@ -30,13 +30,18 @@ class AbsensiController extends Controller
     {
         $search = $request->has('search') ? $request->search : null;
         $data = DB::table('indab_absensi')
-        ->select('*')
+        ->selectRaw("
+            id, judul_meeting, DATE_FORMAT(tgl, \"%d-%m-%Y\") tgl, waktu, IF(link_meeting='', 'Meeting Offline', link_meeting) link_meeting, IF(status_meeting=0, 'Akan Dilaksanakan', IF(status_meeting=1, 'Sedang Dilaksanakan', 'Telah Dilaksanakan')) status_meeting
+        ")
         ->when($search, function($query, $search){
             $query->where('judul_meeting', 'LIKE', "%" . $search . "%");
         })
-        ->orderBy('tgl')
+        ->orderByRaw('YEAR(tgl) desc')
+        ->orderByRaw('MONTH(tgl) desc')
+        ->orderByRaw('DAY(tgl) desc')
         ->orderBy('id')
         ->get();
+
 
         $lokasi = DB::table('indab_lokasi')->select('*')->get();
 
@@ -58,7 +63,7 @@ class AbsensiController extends Controller
         $where = count($request->all()) > 0 ? "WHERE a.lokasi=".$request->lokasi : "";
 
         // TODO USER
-        $subquery = "SELECT a.id id, judul_meeting, tgl, waktu, IF(link_meeting is not null, 'Meeting Online', 'Meeting Offline') link_meeting, status_meeting 
+        $subquery = "SELECT a.id, judul_meeting, DATE_FORMAT(tgl, \"%d-%m-%Y\") tgl, waktu, IF(link_meeting='', 'Meeting Offline', link_meeting) link_meeting, IF(status_meeting=0, 'Akan Dilaksanakan', IF(status_meeting=1, 'Sedang Dilaksanakan', 'Telah Dilaksanakan')) status_meeting
         FROM indab_absensi a 
         JOIN INDAB_LOKASI b 
         ON a.lokasi=b.kode
@@ -81,9 +86,8 @@ class AbsensiController extends Controller
     {
         $request->validate([
             'judul_meeting' => 'required',
+            'tgl' => 'required',
             'waktu' => 'required',
-            'peserta' => 'required',
-            'jumlah' => 'required',
         ]);
 
         $dokumen = ['file_notulen', 'dok_1', 'dok_2', 'dok_3', 'dok_4', 'dok_5'];
@@ -112,9 +116,10 @@ class AbsensiController extends Controller
             'dok_3' => !empty($data[3]) ? $data[3] : null,
             'dok_4' => !empty($data[4]) ? $data[4] : null,
             'dok_5' => !empty($data[5]) ? $data[5] : null,
+            'edit' => $request->edit,
         ]);
         
-
+ 
         if($report){
             return redirect()->route('absensi.create')->with(['success' => 'Data Berhasil Ditambah!']);
         } else {
@@ -156,7 +161,6 @@ class AbsensiController extends Controller
      */
     public function update(Request $request, $id)
     {   
-
         $request->validate([
             'nama' => 'required',
             'perusahaan' => 'required',
@@ -207,8 +211,6 @@ class AbsensiController extends Controller
         $request->validate([
             'judul_meeting' => 'required',
             'waktu' => 'required',
-            'peserta' => 'required',
-            'jumlah' => 'required',
         ]);
 
         $data =[];
@@ -222,29 +224,34 @@ class AbsensiController extends Controller
                 $data[] = $namaFile ? $namaFile : "";
             }    
         }
-        
-        $record->update([
-            'tgl' => $request->tgl,
-            'judul_meeting' => $request->judul_meeting,
-            'waktu' => $request->waktu,
-            'peserta' => $request->has('peserta') ? $request->peserta : $record->peserta,
-            'jumlah' => $request->has('jumlah') ? $request->jumlah : $record->jumlah,
-            'notulen' => $request->has('notulen') ? $request->notulen : $record->notulen,
-            'lokasi' => $request->has('lokasi') ? $request->lokasi : $record->lokasi,
-            'link_meeting' => $request->has('link_meeting') ? $request->link_meeting : $record->link_meeting,
-            'file_notulen' => $request->hasFile('file_notulen') ? $data[0] : $record->file_notulen,
-            'dok_1' => $request->hasFile('dok_1') ? $data[1] : $record->dok_1,
-            'dok_2' => $request->hasFile('dok_2') ? $data[2] : $record->dok_2,
-            'dok_3' => $request->hasFile('dok_3') ? $data[3] : $record->dok_3,
-            'dok_4' => $request->hasFile('dok_4') ? $data[4] : $record->dok_4,
-            'dok_5' => $request->hasFile('dok_5') ? $data[5] : $record->dok_5,
-        ]);
-        
 
-        if($record){
-            return redirect()->route('absensi.create')->with(['success' => 'Data Berhasil Diubah!']);
+        if ($request->edit == $record->edit) {
+            $record->update([
+                'tgl' => $request->tgl,
+                'judul_meeting' => $request->judul_meeting,
+                'waktu' => $request->waktu,
+                'peserta' => $request->has('peserta') ? $request->peserta : $record->peserta,
+                'jumlah' => $request->has('jumlah') ? $request->jumlah : $record->jumlah,
+                'notulen' => $request->has('notulen') ? $request->notulen : $record->notulen,
+                'lokasi' => $request->has('lokasi') ? $request->lokasi : $record->lokasi,
+                'link_meeting' => $request->has('link_meeting') ? $request->link_meeting : $record->link_meeting,
+                'status_meeting' => $record->tgl > Carbon::now() ? 2 : ($record->tgl < Carbon::now() ? 1 : 0),
+                'file_notulen' => $request->hasFile('file_notulen') ? $data[0] : $record->file_notulen,
+                'dok_1' => $request->hasFile('dok_1') ? $data[1] : $record->dok_1,
+                'dok_2' => $request->hasFile('dok_2') ? $data[2] : $record->dok_2,
+                'dok_3' => $request->hasFile('dok_3') ? $data[3] : $record->dok_3,
+                'dok_4' => $request->hasFile('dok_4') ? $data[4] : $record->dok_4,
+                'dok_5' => $request->hasFile('dok_5') ? $data[5] : $record->dok_5,
+            ]);
+            
+    
+            if($record){
+                return redirect()->route('absensi.create')->with(['success' => 'Data Berhasil Diubah!']);
+            } else {
+                return redirect()->route('absensi.create')->with(['error' => 'Data Gagal Diubah!']);
+            }
         } else {
-            return redirect()->route('absensi.create')->with(['error' => 'Data Gagal Diubah!']);
+            return redirect()->route('absensi.create')->with(['error' => 'Token Salah!']);   
         }
     }
 
@@ -258,5 +265,25 @@ class AbsensiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function check_resource($id)
+    {
+        $data = DB::table('indab_absensi')
+        ->selectRaw("tgl, IFNULL(file_notulen, '-') file_notulen, IFNULL(dok_1, '-') dok_1, IFNULL(dok_2, '-') dok_2, IFNULL(dok_3, '-') dok_3, IFNULL(dok_4, '-') dok_4, IFNULL(dok_5, '-') dok_5")
+        ->where('id', '=', $id)
+        ->get();
+
+        $title = [
+            'file_notulen' => 'File Notulen',
+            'dok_1' => 'Dokumen 1',
+            'dok_2' => 'Dokumen 2',
+            'dok_3' => 'Dokumen 3',
+            'dok_4' => 'Dokumen 4',
+            'dok_5' => 'Dokumen 5'
+        ];
+        
+        return view('absensi.detail_dokumen', compact('data', 'title'));
     }
 }

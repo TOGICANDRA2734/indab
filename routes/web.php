@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('home', [HomeController::class, 'index'])->name('home.index');
 
 Route::resource('induksi', InduksiController::class);
 Route::resource('absensi', AbsensiController::class);
@@ -27,6 +27,8 @@ Route::post('absensi-input/{lokasi}', [AbsensiController::class, 'create'])->nam
 
 Route::get('absensi-edit/{lokasi}', [AbsensiController::class, 'edit_absensi'])->name('absensi-edit.edit');
 Route::put('absensi-edit/{lokasi}/edit', [AbsensiController::class, 'update_absensi'])->name('absensi-edit.update');
+
+Route::get('check_resource/{lokasi}', [AbsensiController::class, 'check_resource'])->name('absensi.detail_dokumen');
 
 Route::get('/{lokasi}', [AbsensiController::class, 'create_data'])->name('absensi-location.index');
 Route::get('/', [AbsensiController::class, 'create_data'])->name('absensi-location.index');

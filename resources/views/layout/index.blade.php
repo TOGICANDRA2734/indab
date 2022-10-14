@@ -60,9 +60,11 @@
             {{-- Footer --}}
             @include('component.footer')
             {{-- End Footer --}}
-
+            
+            
         </div>
     </div>
+
     {{-- Modal --}}
     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
         <form class="modal-dialog modal-lg" role="document" method="POST" action="@yield('modal-route')" @yield('form-tambahan')>
@@ -81,6 +83,8 @@
             </div>
         </form>
     </div>
+
+    
     {{-- End Modal --}}
     {{-- Component JavaScript Class --}}
     @include('component.jsClass')

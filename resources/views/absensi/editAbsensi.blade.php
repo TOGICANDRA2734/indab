@@ -9,67 +9,63 @@
                 @csrf
                 @method('PUT')
                 <div class="card-header">
-                    <h4 class="card-title">Data Diri {{$errors}}</h4>
+                    <h4 class="card-title">Data Diri</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
                                 <label class="form-label">Tempat Meeting</label>
-                                <select name="lokasi" id="lokasi" class="form-control" required>
-                                    @foreach ($lokasi as $dt)
-                                        <option value="{{$dt->kode}}" {{old('lokasi', $data->lokasi) == $dt->kode ? "selected" : ""}} >{{$dt->lokasi}}</option>            
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" required value="{{old('lokasi', $data->lokasi)}}" name="lokasi" readonly="readonly">
                                 @error('lokasi')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Judul Meeting</label>
-                                <input type="text" class="form-control" required value="{{old('judul_meeting', $data->judul_meeting)}}" name="judul_meeting">
+                                <input type="text" class="form-control" required value="{{old('judul_meeting', $data->judul_meeting)}}" name="judul_meeting" readonly="readonly">
                                 @error('judul_meeting')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tanggal Meeting</label>
-                                <input type="date" class="form-control" required value="{{old('tgl', $data->tgl)}}" name="tgl">
+                                <input type="date" class="form-control" required value="{{old('tgl', $data->tgl)}}" name="tgl" readonly="readonly">
                                 @error('tgl')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Waktu Meeting</label>
-                                <input type="text" class="form-control" required value="{{old('waktu', $data->waktu)}}" name="waktu">
+                                <input type="text" class="form-control" required value="{{old('waktu', $data->waktu)}}" name="waktu" readonly="readonly">
                                 @error('waktu')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Link Meeting</label>
-                                <input type="text" class="form-control" value="{{old('link_meeting', $data->link_meeting)}}" name="link_meeting">
+                                <input type="text" class="form-control" value="{{old('link_meeting', $data->link_meeting)}}" name="link_meeting" readonly="readonly">
                                 @error('link_meeting')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Peserta dari mana</label>
-                                <input type="text" class="form-control" value="{{old('peserta', $data->peserta)}}" name="peserta">
+                                <input type="text" class="form-control" value="{{old('peserta', $data->peserta)}}" name="peserta" readonly="readonly">
                                 @error('peserta')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Jumlah Peserta</label>
-                                <input type="text" class="form-control" value="{{old('jumlah', $data->jumlah)}}" name="jumlah">
+                                <input type="text" class="form-control" value="{{old('jumlah', $data->jumlah)}}" name="jumlah" readonly="readonly">
                                 @error('jumlah')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Petugas Notulen</label>
-                                <input type="text" class="form-control" value="{{old('notulen', $data->notulen)}}" name="notulen">
+                                <input type="text" class="form-control" value="{{old('notulen', $data->notulen)}}" name="notulen" readonly="readonly">
                                 @error('notulen')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -119,6 +115,11 @@
                                 @error('dok_5')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Token</label>
+                                <input type="text" class="form-control" name="edit">
                             </div>
                         </div>
                     </div>

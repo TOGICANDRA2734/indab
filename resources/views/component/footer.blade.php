@@ -4,9 +4,7 @@
             <div class="col-12 mt-3 mt-lg-0">
                 <ul class="list-inline list-inline-dots mb-0">
                     <li class="list-inline-item">
-                        Copyright &copy; 2022
-                        <a href="http://ptrci.co.id" class="link-secondary">PT. Rpp Contractors Indonesia</a>.
-                        All rights reserved.
+                        <a href="http://ptrci.co.id" class="link-secondary">PT RPP CONTACTORS INDONESIA</a>.
                     </li>
                 </ul>
             </div>

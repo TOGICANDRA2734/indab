@@ -11,6 +11,6 @@ class passwordController extends Controller
     {
         $subquery =  "SELECT pass from indab_password";
         $data = collect(DB::select(DB::raw($subquery)));
-        return $request->password === "123" ? 1 : 0;
+        return $request->password === $data[0]->pass ? 1 : 0;
     }
 }
