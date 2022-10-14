@@ -5,7 +5,7 @@
 @section('content')
     <div class="row row-deck row-cards">
         <div class="col-6">
-            <a class="card" href="{{ route('induksi.create') }}">
+            <a class="card" href="{{ route('induksi.index') }}">
                 <div class="card-body text-center">
                     <div class="d-flex align-items-center">
                         <div class="header mb-3">Induksi</div>
