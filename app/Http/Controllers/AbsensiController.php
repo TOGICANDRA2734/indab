@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensi;
 use App\Models\AbsensiDetail;
+use App\Models\indabAbsensiImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,6 @@ class AbsensiController extends Controller
         ->orderByRaw('DAY(tgl) desc')
         ->orderBy('id')
         ->get();
-
 
         $lokasi = DB::table('indab_lokasi')->select('*')->get();
 
@@ -136,8 +136,11 @@ class AbsensiController extends Controller
     public function show($id)
     {
         $data = DB::table('indab_absensi_detail')->select('*')->where('id_meeting', '=', $id)->get();
+        $lokasi = Absensi::select('lokasi')->where('id', $id)->get();
+        
+        $image = indabAbsensiImage::select('file')->where('kode', $lokasi[0]->lokasi)->get();
 
-        return view('absensi.show', compact('data', 'id'));
+        return view('absensi.show', compact('data', 'id', 'image'));
     }
 
     /**

@@ -5,10 +5,6 @@
 @section('content')
     <form action="{{route('induksi.store')}}" method="POST" class="container-tight py-4">
         @csrf
-        <div class="text-center mb-4">
-            <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
-                    alt=""></a>
-        </div>
         <div class="card card-md">
             <div class="card-body text-center py-4 p-sm-5">
                 <img src="http://ptrci.co.id/gambar/logo/RCI.png" height="128" class="mb-n2" height="120"

@@ -3,28 +3,21 @@
 @section('title-utama', 'BUAT INDUKSI')
 
 @section('content')
-    <form action="{{route('induksi.postCreateThree')}}" method="POST" class="container-tight py-4">
+    <form action="{{route('induksi.postCreateThree')}}" method="POST" class="container-xl px-0 ">
         @csrf
-        <div class="text-center mb-4">
-            <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
-                    alt=""></a>
-        </div>
-        <div class="card card-md">
-            <div class="card-body text-center py-4 p-sm-5">
-                <img src="http://ptrci.co.id/gambar/logo/RCI.png" height="128" class="mb-n2" height="120"
-                    alt="">
-                <h1 class="mt-5">PT RPP CONTRACTORS INDONESIA</h1>
-                <p class="text-muted">Pengajuan Permohonan Induksi</p>
-            </div>
-            <div class="hr-text hr-text-center hr-text-spaceless">Data Diri</div>
+        <div class="card">
             <div class="card-body">
+                
                 <div class="mb-3">
-                    <label class="form-label">Site</label>
+                    <label class="form-label">SOP</label>
                     {{-- <input type="text" class="form-control p-1" autocomplete="off"> --}}
-                    <select name="site" id="site" class="form-control">
-                        <option value="">Site 1</option>
-                    </select>
-                    <div class="form-hint">Silahkan memilih site rujukan.</div>
+                    <iframe src="http://ptrci.co.id/indab_file/sop/IM/contoh.pdf" frameborder="0" height="850" class="w-full"></iframe>
+                </div>
+                <div class="mb-3">
+                    <label class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">Saya menyetujui dan telah membaca SOP yang ada pada Site tsb.</span>
+                      </label>
                 </div>
             </div>
         </div>

@@ -5,10 +5,6 @@
 @section('content')
     <form action="{{route('induksi.postCreateFour')}}" method="POST" class="container-tight py-4">
         @csrf
-        <div class="text-center mb-4">
-            <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
-                    alt=""></a>
-        </div>
         <div class="card card-md">
             <div class="card-body text-center py-4 p-sm-5">
                 <img src="http://ptrci.co.id/gambar/logo/RCI.png" height="128" class="mb-n2" height="120"
@@ -16,16 +12,81 @@
                 <h1 class="mt-5">PT RPP CONTRACTORS INDONESIA</h1>
                 <p class="text-muted">Pengajuan Permohonan Induksi</p>
             </div>
-            <div class="hr-text hr-text-center hr-text-spaceless">Data Diri</div>
+            <div class="hr-text hr-text-center hr-text-spaceless">Persyaratan Dasar Keselamatan Umum</div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label class="form-label">Site</label>
-                    {{-- <input type="text" class="form-control p-1" autocomplete="off"> --}}
-                    <select name="site" id="site" class="form-control">
-                        <option value="">Site 1</option>
-                    </select>
-                    <div class="form-hint">Silahkan memilih site rujukan.</div>
-                </div>
+                    <label class="form-label">Manajemen akan menolak masuk, memindahkan, menolak apabila anda gagal dalam mematuhi peraturan K3 PT RPP CONTRACTORS INDONESIA.</label>
+                    <label class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox">
+                      <span class="form-check-label">
+                        Kebijakan K3LH
+                      </span>
+                    </label>
+                    <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Tanggung Jawab Pengunjung
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Area Kerja
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Manajemen Keadaan Darurat
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Pelaporan Insiden
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Kartu Tanda Pengenal Pengunjung
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Alat Pelindung Diri
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Larangan Mengemudi
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Larang Mendekati Kendaraan Operasi
+                        </span>
+                      </label>
+                    
+                      <label class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">
+                          Larangan Alkohol dan Obat Terlarang
+                        </span>
+                      </label>
+                    
+                      
+                  </div>
             </div>
         </div>
         <div class="row align-items-center mt-3">
