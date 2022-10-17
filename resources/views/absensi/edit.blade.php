@@ -15,7 +15,7 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Input placeholder"
+                                <input type="text" class="form-control" name="nama" id="nama" placeholder=""
                                     required>
                                 @error('nama')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -23,7 +23,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Perusahaan</label>
-                                <input type="text" class="form-control" name="perusahaan" id="perusahaan" placeholder="Input placeholder"
+                                <input type="text" class="form-control" name="perusahaan" id="perusahaan" placeholder=""
                                     required>
                                 @error('perusahaan')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -31,14 +31,14 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Alamat</label>
-                                <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Input placeholder">
+                                <input type="text" class="form-control" name="alamat" id="alamat" placeholder="">
                                 @error('alamat')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Jabatan</label>
-                                <input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="Input placeholder">
+                                <input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="">
                                 @error('jabatan')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -46,7 +46,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">kontak</label>
-                                <input type="text" class="form-control" name="kontak" id="kontak" placeholder="Input placeholder">
+                                <input type="text" class="form-control" name="kontak" id="kontak" placeholder="">
                                 @error('kontak')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

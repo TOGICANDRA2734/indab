@@ -35,6 +35,7 @@
                             <th>Link Meeting</th>
                             <th>Status</th>
                             <th>Link</th>
+                            <th>Galeri</th>
                             <th class="w-1"></th>
                         </tr>
                     </thead>

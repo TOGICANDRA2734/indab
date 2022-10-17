@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\CommisioningController;
+use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InduksiController;
 use App\Http\Controllers\passwordController;
@@ -38,6 +40,13 @@ Route::post('absensi-input/{lokasi}', [AbsensiController::class, 'create'])->nam
 Route::get('absensi-edit/{lokasi}', [AbsensiController::class, 'edit_absensi'])->name('absensi-edit.edit');
 Route::put('absensi-edit/{lokasi}/edit', [AbsensiController::class, 'update_absensi'])->name('absensi-edit.update');
 Route::get('check_resource/{lokasi}', [AbsensiController::class, 'check_resource'])->name('absensi.detail_dokumen');
+
+// Commisioning
+Route::resource('commisioning', CommisioningController::class);
+
+// Galeri
+Route::resource('galeri', GaleriController::class);
+
 Route::get('/{lokasi}', [AbsensiController::class, 'create_data'])->name('absensi-location.index');
 Route::get('/', [AbsensiController::class, 'create_data'])->name('absensi-location.index');
 Route::post('password-absensi', [passwordController::class, 'index'])->name('passwordAbsensi.index');

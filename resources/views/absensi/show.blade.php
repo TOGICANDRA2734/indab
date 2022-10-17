@@ -18,7 +18,7 @@
 @section('content')
 
     <div class="col-12">
-        <img src="http://ptrci.co.id/indab_file/lokasi/{{$image->file}}" alt="">
+        {{-- <img src="http://ptrci.co.id/indab_file/lokasi/{{$image->file}}" alt=""> --}}
     </div>
     <div class="col-12">
         <div class="card">
