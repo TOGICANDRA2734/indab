@@ -1,8 +1,14 @@
 @extends('layout.index')
 
-@section('title-utama', "ABSENSI MEETING")
+@section('title-utama', "Absen - " . $dataMeeting->judul_meeting)
 
 @section('button-add')
+    {{-- TODO: Galeri --}}
+    <a href="{{$dataMeeting->link_dok_1}}" class="btn btn-success d-sm-inline-block">Slide</a>
+
+    {{-- TODO: Resource --}}
+    <a href="{{route('galeri.index')}}" class="btn btn-success d-sm-inline-block">Galeri</a>
+
     <a href="{{route('absensi.edit', $id)}}" class="btn btn-primary d-sm-inline-block">
         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"

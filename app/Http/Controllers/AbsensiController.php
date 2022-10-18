@@ -32,7 +32,7 @@ class AbsensiController extends Controller
         $search = $request->has('search') ? $request->search : null;
         $data = DB::table('indab_absensi')
         ->selectRaw("
-            id, judul_meeting, DATE_FORMAT(tgl, \"%d-%m-%Y\") tgl, waktu, IF(link_meeting='', 'Meeting Offline', link_meeting) link_meeting, IF(status_meeting=0, 'Akan Dilaksanakan', IF(status_meeting=1, 'Sedang Dilaksanakan', 'Telah Dilaksanakan')) status_meeting
+            id, judul_meeting, DATE_FORMAT(tgl, \"%d-%m-%Y\") tgl, waktu, IF(link_meeting='', 'Meeting Offline', link_meeting) link_meeting, IF(status_meeting=0, 'Akan Dilaksanakan', IF(status_meeting=1, 'Sedang Dilaksanakan', 'Telah Dilaksanakan')) status_meeting, ifnull(link_dok_1, '-') link_dok_1
         ")
         ->when($search, function($query, $search){
             $query->where('judul_meeting', 'LIKE', "%" . $search . "%");
@@ -60,10 +60,10 @@ class AbsensiController extends Controller
      */
     public function create_data(Request $request)
     {
-        $where = count($request->all()) > 0 ? "WHERE a.lokasi=".$request->lokasi : "";
+        $where = count($request->all()) > 0 ? "WHERE a.lokasi=".$request->lokasi  : "";
 
         // TODO USER
-        $subquery = "SELECT a.id, judul_meeting, DATE_FORMAT(tgl, \"%d-%m-%Y\") tgl, waktu, IF(link_meeting='', 'Meeting Offline', link_meeting) link_meeting, IF(status_meeting=0, 'Akan Dilaksanakan', IF(status_meeting=1, 'Sedang Dilaksanakan', 'Telah Dilaksanakan')) status_meeting
+        $subquery = "SELECT a.id, judul_meeting, DATE_FORMAT(tgl, \"%d-%m-%Y\") tgl, waktu, IF(link_meeting='', 'Meeting Offline', link_meeting) link_meeting, IF(status_meeting=0, 'Akan Dilaksanakan', IF(status_meeting=1, 'Sedang Dilaksanakan', 'Telah Dilaksanakan')) status_meeting, IFNULL(link_dok_1, '-') link_dok_1
         FROM indab_absensi a 
         JOIN INDAB_LOKASI b 
         ON a.lokasi=b.kode
@@ -137,10 +137,11 @@ class AbsensiController extends Controller
     {
         $data = DB::table('indab_absensi_detail')->select('*')->where('id_meeting', '=', $id)->get();
         $lokasi = Absensi::select('lokasi')->where('id', $id)->get();
+        $dataMeeting = Absensi::findOrFail($id);
         
         $image = indabAbsensiImage::select('file')->where('kode', $lokasi[0]->lokasi)->get();
 
-        return view('absensi.show', compact('data', 'id', 'image'));
+        return view('absensi.show', compact('data', 'id', 'image', 'dataMeeting'));
     }
 
     /**
@@ -274,7 +275,7 @@ class AbsensiController extends Controller
     public function check_resource($id)
     {
         $data = DB::table('indab_absensi')
-        ->selectRaw("tgl, IFNULL(file_notulen, '-') file_notulen, IFNULL(dok_1, '-') dok_1, IFNULL(dok_2, '-') dok_2, IFNULL(dok_3, '-') dok_3, IFNULL(dok_4, '-') dok_4, IFNULL(dok_5, '-') dok_5")
+        ->selectRaw("tgl, IFNULL(file_notulen, '-') file_notulen, IFNULL(dok_1, '-') dok_1, IFNULL(dok_2, '-') dok_2, IFNULL(dok_3, '-') dok_3, IFNULL(dok_4, '-') dok_4, IFNULL(dok_5, '-') dok_5, IFNULL(link_dok_1, '-') link_dok_1, IFNULL(link_dok_2, '-') link_dok_2")
         ->where('id', '=', $id)
         ->get();
 
@@ -284,7 +285,9 @@ class AbsensiController extends Controller
             'dok_2' => 'Dokumen 2',
             'dok_3' => 'Dokumen 3',
             'dok_4' => 'Dokumen 4',
-            'dok_5' => 'Dokumen 5'
+            'dok_5' => 'Dokumen 5',
+            'link_dok_1' => 'Link Dokumen 1',
+            'link_dok_2' => 'Link Dokumen 2',
         ];
         
         return view('absensi.detail_dokumen', compact('data', 'title'));

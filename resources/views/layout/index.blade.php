@@ -41,7 +41,7 @@
                             <div class="page-pretitle">
                                 INDAB - RCI
                             </div>
-                            <h2 class="page-title font-bold">
+                            <h2 class="page-title font-bold text-sm sm:text-base lg:text-xl">
                                 @yield('title-utama')
                             </h2>
                         </div>

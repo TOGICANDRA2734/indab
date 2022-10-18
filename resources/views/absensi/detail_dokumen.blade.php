@@ -22,7 +22,7 @@
                                 <div class="card-title mb-1">{{ $title[$k] }}</div>
                                 {{-- <div class="text-muted"></div> --}}
                             </div>
-                            <a href="{{'http://127.0.0.1:8000' . Storage::url($dt->tgl . '/meeting/' . $d)}}" class="card-btn">Download</a>
+                            <a href="{{$title[$k] == 'Link Dokumen 1' or $title[$k] == 'Link Dokumen 1' ? $d :'http://127.0.0.1:8000' . Storage::url($dt->tgl . '/meeting/' . $d) }}" class="card-btn">Download</a>
                         </div>
                     </div>
                 @endif

@@ -34,8 +34,6 @@
                             <th>Jam</th>
                             <th>Link Meeting</th>
                             <th>Status</th>
-                            <th>Link</th>
-                            <th>Galeri</th>
                             <th class="w-1"></th>
                         </tr>
                     </thead>
@@ -57,23 +55,14 @@
                                     <div>{{ $dt->waktu }}</div>
                                 </td>
                                 <td data-label="Link Meeting">
-                                    <div>
                                         @if ($dt->link_meeting === 'Meeting Offline')
-                                            <p>
                                                 {{ $dt->link_meeting }}
-                                            </p>                                            
                                         @else
                                             <a href="{{$dt->link_meeting}}">Meeting Online</a>
                                         @endif
-                                    </div>
                                 </td>
                                 <td data-label="Status">
                                     <div>{{ $dt->status_meeting }}</div>
-                                </td>
-                                <td data-label="Link">
-                                    <div>
-                                        <a href="{{route('absensi.detail_dokumen', $dt->id)}}">Download Link</a>
-                                    </div>
                                 </td>
                                 <td class="mb-3">
                                     <div class="flex-nowrap btn-list">
