@@ -1,15 +1,9 @@
 @extends('layout.index')
 
-@section('title-utama', "Absen - " . $dataMeeting->judul_meeting)
+@section('title-utama', "Daftar Hadir - " . $dataMeeting->judul_meeting)
 
 @section('button-add')
-    {{-- TODO: Galeri --}}
-    <a href="{{$dataMeeting->link_dok_1}}" class="btn btn-success d-sm-inline-block">Slide</a>
-
-    {{-- TODO: Resource --}}
-    <a href="{{route('galeri.index')}}" class="btn btn-success d-sm-inline-block">Galeri</a>
-
-    <a href="{{route('absensi.edit', $id)}}" class="btn btn-primary d-sm-inline-block">
+    <a href="{{route('absensi.edit', $id)}}" class="btn btn-primary d-sm-inline">
         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -28,6 +22,17 @@
     </div>
     <div class="col-12">
         <div class="card">
+            <div class="card-header" style="">
+                <div>
+                    {{-- TODO: Galeri --}}
+                    <a href="{{$dataMeeting->link_dok_1}}" class="btn btn-success">Slide</a>
+
+                </div>
+                    <div class="ml-60">
+                        {{-- TODO: Resource --}}
+                        <a href="{{route('galeri.index')}}" class="btn btn-success">Galeri</a>
+                    </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-vcenter card-table">
                     <thead>
